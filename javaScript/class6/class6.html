@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="greeting">Hello!</p>
+    <p id="info">Line 1</p>
+    <p id="info">Line 2</p>
+    <p id="info">Line 3</p>
+    <p id="info">Line 4</p>
+</body>
+<script>
+    //ways to select an element
+
+
+
+// document.querySelector-->first matching result, null
+ //documnet.querySelectorAll----> all in an array, empty array
+
+ let elem=document.querySelector(".info");
+ console.log("info",elem.textContent);
+
+ let elemsArr=document.querySelectorAll(",info");
+
+ let secondElem=elemsArr[1];
+
+ console.log("info 2",secondElem.textContent);
+
+ let greetingElem=document.getElementById("greeting");
+ greetingElem.textContent="Changed by id";
+
+ let notesArr=document.getElementsByClassName("note");
+
+
+ for(let i=0;i<notesArr.length;i++){
+    console.log("notes",notesArr[])
+ }
+
+
+
+
+
+
+ 
+</script>
+</html>
