@@ -24,6 +24,9 @@
 
     <button id="btn-events">Change BG
     </button>
+    <h2>Keyboard events</h2>
+    <input type="">
+    <p></p>
 
     <script>
 // task
@@ -51,6 +54,21 @@
             e.preventDefault();
          let div=document.querySelector("div");
         div.style.backgroundColor="yellow";
+         })
+
+
+
+         //keyboard input
+         //1.input selection
+         let input=document.querySelector("input");
+         //2.whenever any keyboard key is pressed then i want to know what has 
+         let str="";
+         input.addEventListener("keydown",function(e){
+
+            console.log("event object",e.key);
+            let p= document.querySelector("p");
+            str=str+e.key;
+            p.textContent=str;
          })
     </script>
 
