@@ -6,7 +6,7 @@ let divElem = document.getElementById("div");
 let inputOneElem = document.getElementById("inputOne");
 let inputTwoElem = document.getElementById("inputTwo");
 
-let calculate = document.getElementById("Calculator");
+let calculateElem = document.getElementById("calculate");
 
 let outputElem = document.getElementById("Output");
 outputElem.textContent = 0;
@@ -83,6 +83,35 @@ divElem.addEventListener('click', function () {
         divElem.style.backgroundColor="blue";
         divElem.style.color="white";
     }
+})
+calculateElem.addEventListener('click', function() {
+    let valOne = Number(inputOneElem.value);
+    let valTwo = Number(inputTwoElem.value);
+    console.log(valOne, valTwo);
+    switch(selectedOperator){
+         case "+":
+            ans=valOne+valTwo;
+            console.log(ans);
+            outputElem.textContent=ans;
+            break;
+        case "-":
+            ans=valOne-valTwo;
+            console.log(ans);
+            outputElem.textContent=ans;
+            break;
+        case "*":
+            ans=valOne*valTwo;
+            console.log(ans);
+            outputElem.textContent=ans;
+            break;
+        case "/":
+            ans=valOne/valTwo;
+            console.log(ans);
+            outputElem.textContent=ans;
+            break;
+        default:
+    }
+       
 })
 
     
