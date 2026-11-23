@@ -1,56 +1,77 @@
-let titleElement = document.getElementById("title");
-let descriptionElement = document.getElementById("description");
-let dateElement = document.getElementById("date");
+let titlelem = document.getElementById("title");
+let descriptionelem = document.getElementById("description");
+let dateelem = document.getElementById("date");
+let addtodobtelem = document.getElementById("addTodo");
 
-let addTodoBtnElement = document.getElementById("addTodo");
+let todolist = [];
 
-let todolist=[];
+addtodobtelem.addEventListener('click', function () {
 
-addTodoBtnElement.addEventListener('click',function(){
- let title=titleElement.value;
- let description=descriptionElement.value;
- let date=dateElement.value;
+    let title = titlelem.value;
+    let description = descriptionelem.value;
+    let date = dateelem.value;
 
- if(!title||!description||!date){
-    alert("Enter all values!");
-    return;
- }
- todolist.push({
-    title,
-    description,
-    date
- });
+    if (!title || !description || !date) {
+        alert("Enter all values");
+        return;
+    }
 
- titleElement.value="";
- descriptionElement.value="";
- dateElement.value="";
+    todolist.push({
+        title,
+        description,
+        date
+    });
 
+    titlelem.value = "";
+    descriptionelem.value = "";
+    dateelem.value = "";
+
+    renderelement();
 });
 
-let listTodoElement= document.getElementById("listTodo");
-let listFragmentElement=document.createDocumentFragment();
-function renderElement(){
-for(let i=0;i<todolist.length;i++){
-    let displayTitle=todolist[i].title;
-    let displayDescription = todolist[i].description;
-    let displayDate=todolist[i].date;
+let listtodoelem = document.getElementById("listtodo");
 
-    let divElement = document.createElement("div");
-    let titleParaElement=document.createElement("p");
-    let descriptionParaElement=document.createElement("p");
-    let dateParaElement=document.createElement("p");
+function renderelement() {
 
+    listtodoelem.innerHTML = "";
 
-    titleParaElement.textContent=displayTitle;
-    descriptionParaElement.textContent=displayDescription;
-    dateParaElement.textContent=displayDate;
+    for (let i = 0; i < todolist.length; i++) {
 
-  let removeBtnElement= document.createElement("button");
-  removeBtnElement.addEventListener('click',function(){
+        let displaytitle = todolist[i].title;
+        let displaydescription = todolist[i].description;
+        let displaydate = todolist[i].date;
 
-  });
-  divElement.append(titleParaElement,descriptionParaElement,dateParaElement,removeBtnElement);
-  listFragmentElement.appendChild(divElement);
-}
-listTodoElement.appendChild(listFragmentElement);
+        let divElem = document.createElement("div");
+        divElem.classList.add("todo-card");
+
+        let titleparaelem = document.createElement("h3");
+        let descriptionparaelem = document.createElement("p");
+        let dateparaelem = document.createElement("p");
+
+        titleparaelem.textContent = displaytitle;
+        descriptionparaelem.textContent = displaydescription;
+        dateparaelem.textContent = "Date: " + displaydate;
+
+        let removebtnelem = document.createElement("button");
+
+        removebtnelem.textContent = "Remove";
+        removebtnelem.classList.add("remove-btn");
+
+        removebtnelem.addEventListener("click", function () {
+
+            todolist.splice(i, 1);
+
+            renderelement();
+
+        });
+
+        divElem.append(
+            titleparaelem,
+            descriptionparaelem,
+            dateparaelem,
+            removebtnelem
+        );
+
+        listtodoelem.appendChild(divElem);
+    }
 }
