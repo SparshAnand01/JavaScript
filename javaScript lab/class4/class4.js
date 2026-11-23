@@ -29,7 +29,7 @@ addTodoBtnElement.addEventListener('click',function(){
 
 let listTodoElement= document.getElementById("listTodo");
 let listFragmentElement=document.createDocumentFragment();
-
+function renderElement(){
 for(let i=0;i<todolist.length;i++){
     let displayTitle=todolist[i].title;
     let displayDescription = todolist[i].description;
@@ -53,3 +53,4 @@ for(let i=0;i<todolist.length;i++){
   listFragmentElement.appendChild(divElement);
 }
 listTodoElement.appendChild(listFragmentElement);
+}
