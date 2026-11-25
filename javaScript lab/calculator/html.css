@@ -1,13 +1,57 @@
-*{
+
+* {
     margin: 0;
     padding: 0;
-    box-sizing: 0;
-
-}
-button{
-    padding: 5px;
-}
-h1{
-    color: aquamarine;
+    box-sizing: border-box;
+    background-color: aqua;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+h1 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+input {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+button {
+    padding: 8px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #ccc;
+}
+
+#calculate {
+    background-color: green;
+    color: white;
+}
+
+#calculate:hover {
+    background-color: darkgreen;
+}
+
+p {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#Output {
+    color: blue;
+}

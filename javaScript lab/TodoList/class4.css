@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: bisque;
+    padding: 30px;
+}
+
+#root {
+    width: 400px;
+    margin: auto;
+}
+
+#inputDiv {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#inputDiv div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+#listTodo > div {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+#listTodo p {
+    margin-bottom: 10px;
+}
+
+#listTodo p:first-child {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#listTodo button {
+    background-color: red;
+}
