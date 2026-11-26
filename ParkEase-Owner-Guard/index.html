@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ParkEase Partner — Owner & Guard Operations Console</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="brand-logo owner-accent">P</div>
+        <div>
+          <div class="brand-title-line">
+            <span class="brand-name">ParkEase Partner</span>
+            <span class="region-pill">Owner & Guard</span>
+          </div>
+          <span class="brand-sub">Shanti Niketan RWA Basement B1 • Gurugram (HR)</span>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="theme-switch" role="switch" aria-checked="false" aria-label="Toggle Dark Mode" title="Switch Theme">
+          <span class="theme-track">
+            <span class="theme-icon sun" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            </span>
+            <span class="theme-icon moon" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </span>
+            <span class="theme-thumb"></span>
+          </span>
+        </button>
+
+        <button id="openOnboardModalBtn" class="btn-primary">+ List New Space (DL / HR)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <div>
+        <h1>Owner & Guard Console</h1>
+        <p class="muted">Zero-hardware slot management, offline basement QR check-in, and T+2 split bank settlements</p>
+      </div>
+      <div class="pill-group">
+        <span class="info-pill">KYC Status: <strong style="color:var(--success)">Verified (PAN + RWA NOC)</strong></span>
+        <span class="info-pill">Payout Cycle: <strong>T+2 Direct Bank</strong></span>
+      </div>
+    </div>
+
+    <!-- Financial Split KPIs -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Weekly Gross Bookings</span>
+        <strong class="stat-num" id="ownerGrossKpi">₹18,450</strong>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Platform Fee (15%)</span>
+        <strong class="stat-num danger" id="ownerCommKpi">- ₹2,768</strong>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">GST on Commission (18%)</span>
+        <strong class="stat-num danger" id="ownerGstKpi">- ₹498</strong>
+      </div>
+      <div class="stat-card accent">
+        <span class="stat-label">Net Settled to Bank (T+2)</span>
+        <strong class="stat-num success" id="ownerNetKpi">₹15,184</strong>
+      </div>
+    </div>
+
+    <!-- Slot Quota + Offline Guard Gate Check-In -->
+    <div class="two-col-grid">
+      <div class="surface-card">
+        <div class="card-top">
+          <div>
+            <h3>Live Slot Quota & Counter</h3>
+            <p class="card-sub">Adjust walk-in occupancy in real time across vehicle pools</p>
+          </div>
+          <label class="switch-pill">
+            <input type="checkbox" id="emergencyFullToggle" />
+            <span>Emergency FULL</span>
+          </label>
+        </div>
+        <div id="ownerInventoryControls" class="quota-list"></div>
+      </div>
+
+      <div class="surface-card">
+        <div class="card-top">
+          <div>
+            <h3>Guard Gate Check-In / Out</h3>
+            <p class="card-sub">Works offline in zero-signal basements via signed QR tokens</p>
+          </div>
+          <span class="status-badge success">Offline Ready</span>
+        </div>
+
+        <div class="scanner-viewport">
+          <div class="laser-line"></div>
+          <p>Scan Driver QR Pass or Enter 6-Digit Basement Code</p>
+        </div>
+
+        <div class="code-entry-row">
+          <input type="text" id="manualCodeInput" placeholder="e.g. PE-HR-4821" />
+          <button id="verifyCheckInBtn" class="btn-primary">Verify Entry / Exit</button>
+        </div>
+
+        <div class="demo-helper">
+          <span>Active pass codes:</span>
+          <button class="text-btn" data-sample="PE-HR-4821">PE-HR-4821 (HR26 EQ 9012)</button>
+          <span>•</span>
+          <button class="text-btn" data-sample="PE-DL-7390">PE-DL-7390 (DL8C AX 7741)</button>
+        </div>
+        <div id="scanResultLog" class="scan-feedback"></div>
+      </div>
+    </div>
+
+    <!-- Recent Arrivals & Submitted Spaces -->
+    <div class="two-col-grid">
+      <div class="surface-card">
+        <div class="card-top">
+          <h3>Today's Gate Activity Log</h3>
+          <span class="status-badge">Auto-Syncing</span>
+        </div>
+        <div id="gateLogList" class="queue-stack"></div>
+      </div>
+
+      <div class="surface-card">
+        <div class="card-top">
+          <h3>My Listed Spaces (DL & HR)</h3>
+          <span class="status-badge success">Active</span>
+        </div>
+        <div id="mySpacesList" class="queue-stack"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- List New Space Modal -->
+  <div id="onboardModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close="onboardModal"></div>
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <h3>List Space (New Delhi & Haryana)</h3>
+        <button class="close-x" data-close="onboardModal">&times;</button>
+      </div>
+      <form id="onboardForm" class="modal-content">
+        <div class="form-grid">
+          <div class="field">
+            <label>State / UT (Phase 1)</label>
+            <select id="newState">
+              <option value="DL">New Delhi (DL)</option>
+              <option value="HR" selected>Haryana (HR)</option>
+              <option value="OTHER" disabled>Other Indian States (Phase 2)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Micro-Market</label>
+            <select id="newMarket">
+              <option value="Saket & Hauz Khas">Saket & Hauz Khas (DL)</option>
+              <option value="CP & AIIMS">CP & AIIMS (DL)</option>
+              <option value="Gurugram Cyber Hub / Medanta" selected>Gurugram Cyber Hub / Medanta (HR)</option>
+              <option value="Faridabad Sec-15">Faridabad Sec-15 (HR)</option>
+            </select>
+          </div>
+          <div class="field span-2">
+            <label>Space Title & Locality</label>
+            <input type="text" id="newTitle" required placeholder="e.g., J-44 Saket Builder Floor Stilt, New Delhi" />
+          </div>
+          <div class="field">
+            <label>Space Type</label>
+            <select id="newType">
+              <option value="Builder Floor / Stilt">Builder Floor / Stilt</option>
+              <option value="RWA Spare Slot">RWA Spare Slot</option>
+              <option value="Clinic / Market Frontage">Clinic / Market Frontage</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Hourly Rate (₹)</label>
+            <input type="number" id="newHourlyRate" value="50" min="10" max="500" required />
+          </div>
+          <div class="field">
+            <label>Reserved Quota</label>
+            <input type="number" id="newSlots" value="3" min="1" max="50" required />
+          </div>
+          <div class="field">
+            <label>Clearance Height</label>
+            <input type="text" id="newHeight" value="2.15m (Fits SUV)" required />
+          </div>
+          <div class="field span-2">
+            <label>Entry-Gate Instructions</label>
+            <input type="text" id="newInstructions" required placeholder="Enter from Gate 2 beside Metro Pillar; show QR to guard" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-ghost" data-close="onboardModal">Cancel</button>
+          <button type="submit" class="btn-primary">Submit for KYC Approval</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="app.js"></script>
+</body>
+</html>
